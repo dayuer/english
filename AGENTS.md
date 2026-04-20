@@ -11,6 +11,7 @@
 ├── app/src/
 │   ├── types/
 │   │   ├── vocabulary.ts          # 词汇数据模型 (RAZ→NeuroGlot 桥接)
+│   │   ├── conversation.ts       # 实时对话引擎类型 (场景/FSM/Persona/情绪)
 │   │   ├── exercise.ts            # 练习题型定义
 │   │   ├── lesson.ts              # 课程与技能树节点
 │   │   ├── chunk.ts               # 组块掌握度追踪
@@ -18,6 +19,10 @@
 │   │   └── content-pack.ts       # 内容包 Manifest
 │   ├── services/
 │   │   ├── vocabulary.ts          # RAZ 词库加载、i+1 窗口查询、抽样
+│   │   ├── conversation-fsm.ts   # 场控 FSM 状态机引擎
+│   │   ├── glm-voice.ts          # GLM-4-Voice WebSocket 客户端 + Prompt 组装器
+│   │   ├── vocab-firewall.ts     # 词汇防火墙 (RAZ 准入控制)
+│   │   ├── scenario-loader.ts    # 场景包加载注册中心
 │   │   ├── pronunciation.ts       # 有道发音 API 服务 (开发阶段)
 │   │   ├── audio-player.ts        # 本地音频播放
 │   │   ├── content-loader.ts      # 课程包加载
@@ -25,9 +30,17 @@
 │   │   ├── courseware.ts          # 课件下载缓存
 │   │   ├── shadowing.ts          # 镜像跟读 (ASR)
 │   │   └── spaced-repetition.ts  # 间隔重复算法
+│   ├── data/
+│   │   └── scenarios/
+│   │       └── customs-entry.ts  # 海关入境场景包 (FSM 定义)
+│   ├── utils/
+│   │   └── hash.ts               # DJB2 哈希工具
+│   ├── components/
+│   │   └── conversation/
+│   │       ├── ConversationScreen.tsx    # 对话主屏幕
+│   │       └── EnvironmentEffects.tsx   # 环境压迫视觉效果
 │   ├── stores/                    # Zustand 状态管理
-│   ├── db/                        # SQLite 本地数据库
-│   └── components/                # UI 组件树
+│   └── db/                        # SQLite 本地数据库
 ├── docs/
 │   ├── architecture.md            # 系统宏观架构与模块设计论述
 │   ├── course_generator_arch.md   # LLM 自动课程生成引擎架构
