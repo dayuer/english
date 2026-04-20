@@ -1,0 +1,83 @@
+# NeuroGlot System Architecture & Agent Roles
+
+## 目录结构树 (Directory Structure)
+```
+/
+├── assets/
+│   └── dicts/
+│       └── raz/                   # RAZ 分级词库 (AA→Z2, 29级, 12526词条)
+│           ├── raz-AA.json ... raz-Z2.json
+│           └── _manifest.json     # 词库注册清单（RAZ 课程拓扑的基础数据源）
+├── app/src/
+│   ├── types/
+│   │   ├── vocabulary.ts          # 词汇数据模型 (RAZ→NeuroGlot 桥接)
+│   │   ├── exercise.ts            # 练习题型定义
+│   │   ├── lesson.ts              # 课程与技能树节点
+│   │   ├── chunk.ts               # 组块掌握度追踪
+│   │   ├── courseware.ts          # 课件分发与跟读
+│   │   └── content-pack.ts       # 内容包 Manifest
+│   ├── services/
+│   │   ├── vocabulary.ts          # RAZ 词库加载、i+1 窗口查询、抽样
+│   │   ├── pronunciation.ts       # 有道发音 API 服务 (开发阶段)
+│   │   ├── audio-player.ts        # 本地音频播放
+│   │   ├── content-loader.ts      # 课程包加载
+│   │   ├── content-pack.ts        # 内容包管理
+│   │   ├── courseware.ts          # 课件下载缓存
+│   │   ├── shadowing.ts          # 镜像跟读 (ASR)
+│   │   └── spaced-repetition.ts  # 间隔重复算法
+│   ├── stores/                    # Zustand 状态管理
+│   ├── db/                        # SQLite 本地数据库
+│   └── components/                # UI 组件树
+├── docs/
+│   ├── architecture.md            # 系统宏观架构与模块设计论述
+│   ├── course_generator_arch.md   # LLM 自动课程生成引擎架构
+│   └── database_schema.md         # 数据库与核心数据结构设计
+├── schema/
+│   └── init.sql                   # MySQL 核心四域初始化脚本
+├── scripts/
+│   └── download-raz.mjs           # RAZ 词库批量下载脚本
+├── task_plan.md
+├── progress.md
+└── AGENTS.md
+```
+
+## 每文件核心职责 (Core Responsibilities)
+- `assets/dicts/raz/`: RAZ 分级词库 JSON 资产，29 个级别共 12,526 词条，来源 qwerty-learner (GPL-3.0)。
+- `app/src/types/vocabulary.ts`: 桥接 qwerty-learner 原始 Word 格式与 NeuroGlot VocabularyEntry，包含 RAZ 分级枚举和 i+1 数值映射。
+- `app/src/services/vocabulary.ts`: 词库惰性加载、按级别查询、i+1 窗口查询、随机抽样、单词精确查找。
+- `app/src/services/pronunciation.ts`: 单词发音服务，集成有道词典 API 与本地 expo-file-system 磁盘缓存，统一接口设计便于未来切换至阿里云 TTS。
+- `docs/architecture.md`: 确立神经可塑性语言引擎的核心设计模式、输入/组块/输出/情绪四个底层子系统的运作标准。
+- `docs/course_generator_arch.md`: 定义 RAZ 29 阶截断式 DAG 拓扑、词汇级别约束引擎、LLM 新闻短文生成器、晋级 Boss 战、课件 JSON Schema 管线。
+- `docs/database_schema.md`: 定义 MySQL + Graph DB 混合存储策略、RAZ 级别跃迁状态追踪、遥测数据 30 天滚动归档标准。
+- `schema/init.sql`: 包含五个核心域（能力评估、AOT队列、RAZ晋级引擎、TTS资产去重缓存、交互遥测）的具体 DDL 定义。
+- `scripts/download-raz.mjs`: 零依赖 Node.js 脚本，从 GitHub 批量拉取 RAZ JSON 并生成 manifest。
+- `task_plan.md`: 无交互环境下的强迫执行边界与状态检查单。
+- `progress.md`: 记载当前项目的执行生命周期，充当系统的外部工作记忆。
+- `AGENTS.md`: 定义全局系统边界与代码规范基石。
+
+## 系统模块级依赖关系 (Module Dependencies)
+
+```mermaid
+graph TD
+    A[RAZ Vocabulary Matrix\n(29级分级词表 AA→Z2)] --> B[Neural Chunking & Graph Network\n(神经组块提取与知识图谱)]
+    B --> C[3-Tier Output Sandbox\n(三阶输出与回放网格)]
+    C -.Feedback.-> B
+    A -.Emotion Filter.-> D[Affective Filter Regulators\n(情绪管理控制总线)]
+    B -.Emotion Filter.-> D
+    C -.Emotion Filter.-> D
+    D -.Bio-rhythm Sync.-> C
+    B --> E[29-Tiered DAG Curriculum Engine\n(RAZ 分级技能树发生器)]
+    E -.Target.-> F[Micro-Lesson Synthesizer\n(RAZ 词汇约束 LLM 课程合成器)]
+    A -.Vocab Wall.-> F  %% RAZ 词表构成词汇墙，约束 LLM 生成边界
+    F --> G[Leveled News Generator\n(RAZ 级别新闻短文生成器)]
+    G --> C
+    F --> C
+```
+
+**代理职责划分**：
+1. **Input Agent (RAZ Vocabulary Manager)**：职责为管理 29 级 RAZ 词表的加载、更新与级别间词汇封要。构建 Allowed Vocabulary Set 哈希表，为下游课件合成提供词汇墙约束。
+2. **Chunking Agent (Graph DB Manager)**: 职责为模式识别与网络构建，依赖 Input Agent 的粗数据，输出结构化组块。
+3. **Curriculum Topology Agent (RAZ DAG Manager)**: 职责为管理用户的 RAZ 层级跃迁（AA 到 Z2 的轨道状态管理），生成每个级别内部的 DAG 微课拓扑，触发晋级 Boss 战。
+4. **Lesson Synthesis Agent (RAZ-Constrained Content Pipeline)**: 职责为在服务端预组装 JSON 与阿里云 TTS 音频资源。执行词汇级别降级清洗（Vocabulary Downgrade Filtering），确保生成的题干句子和新闻短文不超纲。
+5. **Sandbox Agent (UI Player)**: 职责为管控通过 Manifest 发起的客户端课件单课并发下载系统，注入本地 `file://` 路径无状态启动课程。包含在用户答题跟读时的状态拦截与录音上报，支持失败容错。
+6. **Affective Agent (System Doctor)**: 职责为监测各个链路产生的压力值，拥有强行叫停/切换任务的最高权限。
