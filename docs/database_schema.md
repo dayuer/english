@@ -12,7 +12,7 @@
 
 ## 2. 核心架构表说明
 
-所有的表定义及初始化都在 `schema/init.sql`（当前版本 1.2.0）。此处仅论述架构哲学。
+所有的表定义及初始化都在 `schema/init.sql`（当前版本 2.0.0）。此处仅论述架构哲学。
 
 ### 2.1 用户身份：`users`
 包含基本认证字段（`phone`/`email`/`password_hash`）、语言对配置（`native_lang`/`target_lang`）和兴趣标签。`competence_score` 采用 Elo 积分制（初始 1200），可横向对比用户间的整体外语"战斗力"。
@@ -26,6 +26,8 @@
 - **`chunk_hash`** + **`chunk_text`**：Hash 用于高效检索与去重，原文冗余存储于 `chunk_text` 字段，保障前端可以在不依赖 Neo4j 的情况下独立渲染"已掌握组块"列表。
 - **`mastery_level` (0-5)**：反映从初次见面的生涩到母语级别的条件反射。
 - **`avg_reaction_ms`**：核心评价指标。1500ms 以上证明大脑经过了 L1 到 L2 的翻译，300ms 以内证明大脑构建了直觉神经反射。该值越小，代表组块内化程度越高。
+- **`best_reaction_ms`**：历史最佳反应时间。用于展示用户的“工作记录”，增强成就感。
+- **`reflex_tier`**：MySQL 生成列（Generated Column），根据 `avg_reaction_ms` 自动计算。分五档：`untrained`（未训练）、`slow`（>2000ms）、`moderate`（>800ms）、`fast`（>400ms）、`reflex`（≤400ms，条件反射达成）。前端可直接读取此字段渲染 Chunk 卡片颜色编码。
 - **`attempt_count`** / **`error_count`**：永久累积的聚合值，不受遥测表 30 天归档影响，使得正确率 `(attempt_count - error_count) / attempt_count` 始终可计算。
 - **`next_review_at`**：由专用的 Spaced Repetition (SR) 算法，根据历史错误次数和上一次交互成绩预测出的遗忘抗性临界点。
 
@@ -78,3 +80,30 @@
 - **`reaction_duration_ms`** 与 **`is_correct`**：为定期修正 `user_chunks` 的遗忘算法提供原始燃料。
 - **`lesson_id` 外键**：通过 `ON DELETE SET NULL` 关联至 `lesson_queue`，确保课程删除后遥测记录不被级联清除，仅丢失关联关系。
 - **归档策略 (30-Day Rolling Archive)**：业务上实施严格的 30 天滚动归档方案——定时 Cron 脚本将 30 天以外的记录转存至 S3 冷数据湖后从 MySQL 删除。但**关键聚合值** (`user_chunks.attempt_count` / `error_count`) 在遥测写入时已同步递增至 `user_chunks` 表，因此归档不会导致任何统计精度损失。
+
+---
+
+## 3. 实时对话引擎域 (Real-Time Conversation Domain)
+
+详见 `docs/realtime_conversation_arch.md` 任务 4。此处仅列出核心表及其架构位置。
+
+### 3.1 场景包注册：`scenario_packs`
+每个场景包是一个完整的有限状态机（FSM），对应一个真实物理场景（如“海关入境”“星巴克点餐”）。
+
+- **RAZ 准入约束**：`raz_level_min` 和 `raz_level_max` 确定用户准入门槛和 NPC 词汇墙上界。
+- **角色面具 (Persona)**：`player_persona` 字段存储用户面具描述，`npc_name`/`npc_role` 和 `emotion_escalation` JSON 数组定义 NPC 人设和情绪升级链。
+- **FSM 定义**：`fsm_definition` JSON 字段存储完整状态机，`initial_state`/`success_state`/`failure_state` 为入口快查字段。
+- **商业属性**：`is_free` + `price_sku` 支撑免费层/付费包的转化漏斗。
+
+### 3.2 FSM 状态节点索引：`scenario_states`
+从 `fsm_definition` JSON 展开的快速查询索引表。每个状态节点包含 `expected_chunks`（目标 Chunk 数组）、`max_timeouts`（最大超时次数）和 `fail_branch`（超时耗尽后跳转）。
+
+### 3.3 对话会话追踪：`conversation_sessions`
+记录用户单次场景交互的完整生命周期。包含会话级聚合指标（`avg_reaction_ms`、`reward_level`）和商业转化埋点（`conversion_trigger_fired`、`conversion_trigger_type`）。
+
+### 3.4 Chunk 反应遥测：`chunk_reactions`
+**400ms 指标体系的唯一原始数据源**。记录每一次用户在特定场景、特定情绪压迫下对特定 Chunk 的反应耗时。
+
+- **`reaction_ms`**：从 NPC 话音结束到用户首个有效音节的毫秒数（由 Rust `Instant` 精确计时）。
+- **情绪上下文**：`emotion_at_trigger` + `timeout_count_at_trigger` 记录触发时的 NPC 情绪状态，用于分析压迫感与反应速度的相关性。
+- **数据流动**：`chunk_reactions` 的 EMA 聚合值回写至 `user_chunks.avg_reaction_ms`，原始遥测 30 天归档，聚合值永久保留。
