@@ -1,5 +1,5 @@
 -- NeuroGlot Initial MySQL Database Schema
--- Version: 1.2.0
+-- Version: 2.0.0
 -- Dialect: MySQL 8.0+
 
 CREATE DATABASE IF NOT EXISTS neuroglot_engine DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -32,13 +32,25 @@ CREATE TABLE IF NOT EXISTS user_chunks (
     chunk_text VARCHAR(500) NOT NULL COMMENT 'Denormalized original text for display without graph DB lookup',
     mastery_level TINYINT DEFAULT 0 COMMENT '0=New, 1=Recognized, 2=Recalled, 3=Fluent, 4=Automatic, 5=Native',
     avg_reaction_ms INT DEFAULT 0 COMMENT 'Lower = deeper internalization. <300ms = intuitive',
+    best_reaction_ms INT DEFAULT 0 COMMENT 'Historical best reaction time for this chunk',
     attempt_count INT DEFAULT 0 COMMENT 'Total interaction count, never pruned',
     error_count INT DEFAULT 0 COMMENT 'Total error count, never pruned',
+    last_scenario_id VARCHAR(64) NULL COMMENT 'Last scenario where this chunk was triggered',
+    reflex_tier ENUM('untrained','slow','moderate','fast','reflex') GENERATED ALWAYS AS (
+        CASE
+            WHEN avg_reaction_ms = 0 THEN 'untrained'
+            WHEN avg_reaction_ms > 2000 THEN 'slow'
+            WHEN avg_reaction_ms > 800 THEN 'moderate'
+            WHEN avg_reaction_ms > 400 THEN 'fast'
+            ELSE 'reflex'
+        END
+    ) STORED COMMENT 'Auto-calculated reflex tier. reflex=<=400ms=conditioned response',
     last_reviewed_at TIMESTAMP NULL,
     next_review_at TIMESTAMP NULL COMMENT 'Predicted by spaced repetition algorithm',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE KEY uk_user_chunk (user_id, chunk_hash),
     INDEX idx_review_schedule (user_id, next_review_at),
+    INDEX idx_reflex_tier (user_id, reflex_tier),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -120,3 +132,96 @@ CREATE TABLE IF NOT EXISTS learning_telemetry (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (lesson_id) REFERENCES lesson_queue(id) ON DELETE SET NULL
 ) COMMENT='High frequency log. 30-day rolling archive enforced by application cron.';
+
+-- ==========================================
+-- 5. 实时对话引擎域 (Real-Time Conversation Domain)
+-- ==========================================
+
+-- 5.1 场景包定义表 (Scenario Pack Registry)
+CREATE TABLE IF NOT EXISTS scenario_packs (
+    id VARCHAR(64) PRIMARY KEY COMMENT 'e.g. customs_entry_v2',
+    title VARCHAR(200) NOT NULL COMMENT '场景标题',
+    description TEXT NULL,
+    raz_level_min ENUM('AA','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Z1','Z2') NOT NULL COMMENT '最低准入 RAZ 等级',
+    raz_level_max ENUM('AA','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Z1','Z2') NOT NULL COMMENT '词汇墙上界',
+    npc_name VARCHAR(100) NOT NULL COMMENT 'NPC 名称',
+    npc_role VARCHAR(100) NOT NULL COMMENT 'NPC 角色',
+    emotion_baseline VARCHAR(32) DEFAULT 'professional' COMMENT '基础情绪标签',
+    emotion_escalation JSON NOT NULL COMMENT '情绪升级链 JSON 数组',
+    player_persona TEXT NOT NULL COMMENT '用户面具描述',
+    glm_voice_id VARCHAR(64) NULL COMMENT 'GLM-4-Voice 音色 ID',
+    fsm_definition JSON NOT NULL COMMENT '完整状态机 JSON（states + transitions）',
+    initial_state VARCHAR(64) NOT NULL,
+    success_state VARCHAR(64) NOT NULL,
+    failure_state VARCHAR(64) NOT NULL,
+    is_free BOOLEAN DEFAULT FALSE COMMENT '免费场景包',
+    price_sku VARCHAR(64) NULL COMMENT 'App Store / 微信支付 SKU',
+    sort_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_raz_range (raz_level_min, raz_level_max),
+    INDEX idx_free (is_free)
+) COMMENT='场景包注册表。每个场景包 = 一个完整的 FSM + 角色面具。';
+
+-- 5.2 场景状态节点索引表
+CREATE TABLE IF NOT EXISTS scenario_states (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    scenario_id VARCHAR(64) NOT NULL,
+    state_id VARCHAR(64) NOT NULL COMMENT '状态节点 ID: S2_purpose',
+    description VARCHAR(500) NOT NULL,
+    npc_prompt TEXT NOT NULL COMMENT 'NPC 进入此状态时的台词模板',
+    expected_chunks JSON NOT NULL COMMENT '目标 Chunk 数组',
+    max_timeouts TINYINT DEFAULT 3 COMMENT '最大超时次数',
+    fail_branch VARCHAR(64) NULL COMMENT '超时耗尽后跳转状态',
+    hints JSON NULL COMMENT '提示短语',
+    sort_order INT DEFAULT 0,
+    UNIQUE KEY uk_scenario_state (scenario_id, state_id),
+    INDEX idx_scenario (scenario_id),
+    FOREIGN KEY (scenario_id) REFERENCES scenario_packs(id) ON DELETE CASCADE
+) COMMENT='FSM 状态节点索引表。从 fsm_definition 展开。';
+
+-- 5.3 对话会话追踪表
+CREATE TABLE IF NOT EXISTS conversation_sessions (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    scenario_id VARCHAR(64) NOT NULL,
+    current_state_id VARCHAR(64) NOT NULL COMMENT '当前 FSM 节点',
+    status ENUM('active', 'completed', 'failed', 'abandoned') DEFAULT 'active',
+    total_turns INT DEFAULT 0,
+    total_timeouts INT DEFAULT 0,
+    avg_reaction_ms INT DEFAULT 0 COMMENT '会话平均反应时间',
+    reward_level CHAR(1) NULL COMMENT 'S/A/B/C/F 通关评级',
+    conversion_trigger_fired BOOLEAN DEFAULT FALSE COMMENT '是否触发转化弹窗',
+    conversion_trigger_type ENUM('frustration', 'achievement', 'none') DEFAULT 'none',
+    started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ended_at TIMESTAMP NULL,
+    INDEX idx_user_status (user_id, status),
+    INDEX idx_user_scenario (user_id, scenario_id),
+    INDEX idx_conversion (conversion_trigger_fired, conversion_trigger_type),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (scenario_id) REFERENCES scenario_packs(id) ON DELETE CASCADE
+) COMMENT='对话会话生命周期追踪。';
+
+-- 5.4 Chunk 反应延迟遥测表 — 400ms 指标的唯一数据源
+CREATE TABLE IF NOT EXISTS chunk_reactions (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    session_id BIGINT NOT NULL,
+    scenario_id VARCHAR(64) NOT NULL,
+    state_id VARCHAR(64) NOT NULL COMMENT '触发此反应的 FSM 状态节点',
+    chunk_hash VARCHAR(64) NOT NULL COMMENT 'SHA256 of normalized chunk text',
+    chunk_text VARCHAR(500) NOT NULL COMMENT '冗余存储避免 JOIN',
+    reaction_ms INT NOT NULL COMMENT '核心指标: NPC话音结束→用户首个有效音节',
+    is_timeout BOOLEAN NOT NULL DEFAULT FALSE,
+    intent_matched BOOLEAN NOT NULL DEFAULT FALSE,
+    confidence FLOAT DEFAULT 0.0 COMMENT 'GLM-4-Voice 意图识别置信度',
+    emotion_at_trigger VARCHAR(32) NOT NULL COMMENT '触发时 NPC 情绪标签',
+    timeout_count_at_trigger TINYINT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_user_chunk (user_id, chunk_hash),
+    INDEX idx_user_reaction (user_id, reaction_ms),
+    INDEX idx_session (session_id),
+    INDEX idx_timeout_analysis (user_id, is_timeout, chunk_hash),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (session_id) REFERENCES conversation_sessions(id) ON DELETE CASCADE
+) COMMENT='Chunk 反应延迟原始遥测。400ms 指标的唯一数据源。30 天滚动归档。';

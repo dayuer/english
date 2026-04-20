@@ -41,3 +41,5 @@
 **当前状态**: 词汇基础层就绪，可供 Curriculum Topology Agent 和诊断系统消费。
 ## 2026-04-20
 - 初始化 git 仓库，添加 origin 配置并使用 init message 推送至 https://github.com/dayuer/english.git (master/main)
+
+- 修复 app 目录被识别为 embedded git repository 的问题，重新追踪内部源码并推送到 origin

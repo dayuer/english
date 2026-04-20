@@ -31,7 +31,9 @@
 ├── docs/
 │   ├── architecture.md            # 系统宏观架构与模块设计论述
 │   ├── course_generator_arch.md   # LLM 自动课程生成引擎架构
-│   └── database_schema.md         # 数据库与核心数据结构设计
+│   ├── database_schema.md         # 数据库与核心数据结构设计
+│   ├── realtime_conversation_arch.md # 实时对话引擎架构 (Rust/JSI + GLM-4-Voice + FSM)
+│   └── methodology_6month.md      # 6 个月行为重塑方法论
 ├── schema/
 │   └── init.sql                   # MySQL 核心四域初始化脚本
 ├── scripts/
@@ -48,8 +50,10 @@
 - `app/src/services/pronunciation.ts`: 单词发音服务，集成有道词典 API 与本地 expo-file-system 磁盘缓存，统一接口设计便于未来切换至阿里云 TTS。
 - `docs/architecture.md`: 确立神经可塑性语言引擎的核心设计模式、输入/组块/输出/情绪四个底层子系统的运作标准。
 - `docs/course_generator_arch.md`: 定义 RAZ 29 阶截断式 DAG 拓扑、词汇级别约束引擎、LLM 新闻短文生成器、晋级 Boss 战、课件 JSON Schema 管线。
+- `docs/realtime_conversation_arch.md`: 实时对话引擎全层架构：Rust/JSI VAD 接口、GLM-4-Voice 集成、意图状态机流转、Chunk 反应延迟遥测、Persona 面具与词汇防火墙的 Prompt 组装逻辑。
+- `docs/methodology_6month.md`: 6 个月行为重塑方法论，覆盖 Chunk Reflex、Persona Masking、情境知觉锚定三层认知神经科学机制。
 - `docs/database_schema.md`: 定义 MySQL + Graph DB 混合存储策略、RAZ 级别跃迁状态追踪、遥测数据 30 天滚动归档标准。
-- `schema/init.sql`: 包含五个核心域（能力评估、AOT队列、RAZ晋级引擎、TTS资产去重缓存、交互遥测）的具体 DDL 定义。
+- `schema/init.sql`: 包含六个核心域（能力评估、AOT队列、RAZ晋级引擎、TTS资产去重缓存、交互遥测、实时对话引擎）的具体 DDL 定义。
 - `scripts/download-raz.mjs`: 零依赖 Node.js 脚本，从 GitHub 批量拉取 RAZ JSON 并生成 manifest。
 - `task_plan.md`: 无交互环境下的强迫执行边界与状态检查单。
 - `progress.md`: 记载当前项目的执行生命周期，充当系统的外部工作记忆。
