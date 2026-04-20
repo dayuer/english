@@ -1,0 +1,406 @@
+{
+  "packId": "coffee-culture-v1",
+  "title": "咖啡文化",
+  "version": 1,
+  "langPair": "zh-CN → en",
+  "lessons": {
+    "1": {
+      "lessonId": "ordering-coffee-001",
+      "title": "点咖啡",
+      "concept": "ordering_coffee",
+      "exercises": [
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "I'd like an iced Americano, please.",
+          "l1": "我想要一杯冰美式，谢谢。",
+          "targetChunk": "iced_americano_order",
+          "answer": ["I'd", "like", "an iced", "Americano", "please"],
+          "interferenceOptions": ["want", "a hot", "could I"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "我能外带一杯拿铁吗？",
+          "l1": "我能外带一杯拿铁吗？",
+          "targetChunk": "latte_to_go",
+          "answer": ["Could I", "get a", "latte", "to go"],
+          "interferenceOptions": ["have", "for here", "want"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Can I have a flat white, please?",
+          "l1": "请给我一杯馥芮白。",
+          "targetChunk": "flat_white_order",
+          "answer": ["Can I", "have a", "flat white", "please"],
+          "interferenceOptions": ["get", "cappuccino", "thanks"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "我要一杯中杯卡布奇诺。",
+          "l1": "我要一杯中杯卡布奇诺。",
+          "targetChunk": "medium_cappuccino",
+          "answer": ["I'll", "have a", "medium", "cappuccino"],
+          "interferenceOptions": ["large", "want", "latte"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "One espresso, no sugar.",
+          "l1": "一杯浓缩，不加糖。",
+          "targetChunk": "espresso_no_sugar",
+          "answer": ["One", "espresso", "no sugar"],
+          "interferenceOptions": ["two", "with sugar", "latte"]
+        }
+      ]
+    },
+    "2": {
+      "lessonId": "milk-options-002",
+      "title": "奶制品选择",
+      "concept": "milk_options",
+      "exercises": [
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Is there oat milk available?",
+          "l1": "有燕麦奶吗？",
+          "targetChunk": "oat_milk_available",
+          "answer": ["Is there", "oat milk", "available"],
+          "interferenceOptions": ["any", "soy milk", "here"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "可以换成杏仁奶吗？",
+          "l1": "可以换成杏仁奶吗？",
+          "targetChunk": "switch_almond_milk",
+          "answer": ["Can I", "switch to", "almond milk"],
+          "interferenceOptions": ["change", "oat milk", "have"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "I'm lactose intolerant. Do you have any alternatives?",
+          "l1": "我乳糖不耐受，你们有替代品吗？",
+          "targetChunk": "lactose_intolerant",
+          "answer": ["I'm", "lactose intolerant", "Do you have", "any alternatives"],
+          "interferenceOptions": ["allergic", "options", "some milk"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "我想要少奶的拿铁。",
+          "l1": "我想要少奶的拿铁。",
+          "targetChunk": "less_milk_latte",
+          "answer": ["I'd like", "a latte", "with less milk"],
+          "interferenceOptions": ["more milk", "no milk", "want"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Does the coconut milk cost extra?",
+          "l1": "椰奶需要加钱吗？",
+          "targetChunk": "coconut_milk_extra",
+          "answer": ["Does the", "coconut milk", "cost extra"],
+          "interferenceOptions": ["oat milk", "is it", "free"]
+        }
+      ]
+    },
+    "3": {
+      "lessonId": "hot-or-iced-003",
+      "title": "冰饮 vs 热饮",
+      "concept": "hot_or_iced",
+      "exercises": [
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "I'll have it iced, please.",
+          "l1": "请给我冰的。",
+          "targetChunk": "make_it_iced",
+          "answer": ["I'll", "have it", "iced", "please"],
+          "interferenceOptions": ["hot", "take", "want"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "可以加冰吗？",
+          "l1": "可以加冰吗？",
+          "targetChunk": "add_ice",
+          "answer": ["Can I", "get some", "ice in that"],
+          "interferenceOptions": ["extra ice", "no ice", "have"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Could you make it extra hot?",
+          "l1": "可以做得更热一些吗？",
+          "targetChunk": "extra_hot",
+          "answer": ["Could you", "make it", "extra hot"],
+          "interferenceOptions": ["warm", "iced", "please"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "不加冰，常温就好。",
+          "l1": "不加冰，常温就好。",
+          "targetChunk": "no_ice_room_temp",
+          "answer": ["No ice", "room temperature", "is fine"],
+          "interferenceOptions": ["with ice", "please", "cold"]
+        }
+      ]
+    },
+    "4": {
+      "lessonId": "pastry-order-004",
+      "title": "搭配点心",
+      "concept": "pastry_order",
+      "exercises": [
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "I'll also have a croissant, please.",
+          "l1": "我再来一个牛角包。",
+          "targetChunk": "also_croissant",
+          "answer": ["I'll", "also have", "a croissant", "please"],
+          "interferenceOptions": ["want", "muffin", "too"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "这个蛋糕多少钱？",
+          "l1": "这个蛋糕多少钱？",
+          "targetChunk": "cake_price",
+          "answer": ["How much", "is this", "cake"],
+          "interferenceOptions": ["that", "costs", "muffin"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "What pastries do you have today?",
+          "l1": "今天有什么点心？",
+          "targetChunk": "what_pastries_today",
+          "answer": ["What pastries", "do you have", "today"],
+          "interferenceOptions": ["cakes", "are there", "now"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "可以帮我加热一下吗？",
+          "l1": "可以帮我加热一下吗？",
+          "targetChunk": "warm_it_up",
+          "answer": ["Could you", "warm it up", "for me"],
+          "interferenceOptions": ["heat", "please", "this"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Is the banana bread fresh?",
+          "l1": "香蕉面包是新鲜的吗？",
+          "targetChunk": "banana_bread_fresh",
+          "answer": ["Is the", "banana bread", "fresh"],
+          "interferenceOptions": ["that", "cake", "good"]
+        }
+      ]
+    },
+    "5": {
+      "lessonId": "payment-005",
+      "title": "结账付款",
+      "concept": "payment",
+      "exercises": [
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Can I pay by card?",
+          "l1": "可以刷卡吗？",
+          "targetChunk": "pay_by_card",
+          "answer": ["Can I", "pay", "by card"],
+          "interferenceOptions": ["cash", "with", "use"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "总共多少钱？",
+          "l1": "总共多少钱？",
+          "targetChunk": "how_much_total",
+          "answer": ["How much", "is that", "in total"],
+          "interferenceOptions": ["altogether", "it costs", "the price"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Do you accept Apple Pay?",
+          "l1": "你们接受 Apple Pay 吗？",
+          "targetChunk": "accept_apple_pay",
+          "answer": ["Do you", "accept", "Apple Pay"],
+          "interferenceOptions": ["take", "have", "cash"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "不用找零了。",
+          "l1": "不用找零了。",
+          "targetChunk": "keep_the_change",
+          "answer": ["Keep", "the change"],
+          "interferenceOptions": ["no change", "it's fine", "thank you"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Could I have the receipt, please?",
+          "l1": "请给我收据。",
+          "targetChunk": "receipt_please",
+          "answer": ["Could I", "have the", "receipt", "please"],
+          "interferenceOptions": ["get", "bill", "check"]
+        }
+      ]
+    },
+    "6": {
+      "lessonId": "greetings-006",
+      "title": "寒暄告别",
+      "concept": "greetings",
+      "exercises": [
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Hi, how's your day going?",
+          "l1": "嗨，今天过得怎么样？",
+          "targetChunk": "hows_your_day",
+          "answer": ["Hi", "how's", "your day", "going"],
+          "interferenceOptions": ["hello", "the weather", "is"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "祝你有美好的一天！",
+          "l1": "祝你有美好的一天！",
+          "targetChunk": "have_a_great_day",
+          "answer": ["Have a", "great day"],
+          "interferenceOptions": ["nice day", "good morning", "see you"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Thanks, you too! See you around.",
+          "l1": "谢谢，你也是！回头见。",
+          "targetChunk": "thanks_you_too",
+          "answer": ["Thanks", "you too", "See you", "around"],
+          "interferenceOptions": ["goodbye", "later", "bye"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "很高兴认识你。",
+          "l1": "很高兴认识你。",
+          "targetChunk": "nice_to_meet_you",
+          "answer": ["Nice to", "meet you"],
+          "interferenceOptions": ["see you", "know you", "happy"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "It was lovely chatting with you.",
+          "l1": "很高兴和你聊天。",
+          "targetChunk": "lovely_chatting",
+          "answer": ["It was", "lovely", "chatting with", "you"],
+          "interferenceOptions": ["nice", "talking to", "great"]
+        }
+      ]
+    },
+    "7": {
+      "lessonId": "directions-007",
+      "title": "问路指路",
+      "concept": "directions",
+      "exercises": [
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Excuse me, where is the nearest subway?",
+          "l1": "打扰一下，最近的地铁站在哪？",
+          "targetChunk": "nearest_subway",
+          "answer": ["Excuse me", "where is", "the nearest", "subway"],
+          "interferenceOptions": ["bus stop", "how far", "the closest"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "从这里走过去大概多长时间？",
+          "l1": "从这里走过去大概多长时间？",
+          "targetChunk": "how_long_walk",
+          "answer": ["How long", "does it take", "to walk", "from here"],
+          "interferenceOptions": ["how far", "to drive", "is it"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Turn right at the traffic light.",
+          "l1": "在红绿灯右转。",
+          "targetChunk": "turn_right_light",
+          "answer": ["Turn right", "at the", "traffic light"],
+          "interferenceOptions": ["turn left", "corner", "stop sign"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "就在前面那栋楼的旁边。",
+          "l1": "就在前面那栋楼的旁边。",
+          "targetChunk": "next_to_building",
+          "answer": ["It's right", "next to", "that building", "ahead"],
+          "interferenceOptions": ["behind", "across from", "near"]
+        }
+      ]
+    },
+    "8": {
+      "lessonId": "time-expressions-008",
+      "title": "时间表达",
+      "concept": "time_expressions",
+      "exercises": [
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "What time do you close today?",
+          "l1": "你们今天几点关门？",
+          "targetChunk": "what_time_close",
+          "answer": ["What time", "do you", "close today"],
+          "interferenceOptions": ["open", "are you", "tomorrow"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "我大约三点半到。",
+          "l1": "我大约三点半到。",
+          "targetChunk": "arrive_three_thirty",
+          "answer": ["I'll be there", "around", "three thirty"],
+          "interferenceOptions": ["at", "half past", "about"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "The meeting starts in fifteen minutes.",
+          "l1": "会议十五分钟后开始。",
+          "targetChunk": "meeting_fifteen_min",
+          "answer": ["The meeting", "starts in", "fifteen minutes"],
+          "interferenceOptions": ["ends in", "begins at", "ten minutes"]
+        },
+        {
+          "type": "translate",
+          "instruction": "将中文翻译成英文",
+          "prompt": "你今天什么时候有空？",
+          "l1": "你今天什么时候有空？",
+          "targetChunk": "when_are_you_free",
+          "answer": ["When are", "you free", "today"],
+          "interferenceOptions": ["available", "what time", "tomorrow"]
+        },
+        {
+          "type": "listen_and_tap",
+          "instruction": "听音频，拼出正确的句子",
+          "prompt": "Sorry, I'm running a bit late.",
+          "l1": "抱歉，我会晚一点到。",
+          "targetChunk": "running_late",
+          "answer": ["Sorry", "I'm running", "a bit late"],
+          "interferenceOptions": ["I'll be", "very late", "on time"]
+        }
+      ]
+    }
+  }
+}

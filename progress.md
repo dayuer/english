@@ -39,3 +39,5 @@
 - ✓ 先用有道发音 API，后续切换阿里云 TTS（用户确认）。
 
 **当前状态**: 词汇基础层就绪，可供 Curriculum Topology Agent 和诊断系统消费。
+## 2026-04-20
+- 初始化 git 仓库，添加 origin 配置并使用 init message 推送至 https://github.com/dayuer/english.git (master/main)

@@ -1,0 +1,102 @@
+{
+  "questions": [
+    {
+      "type": "intention",
+      "instruction": "听这段音频，选择正确的意图",
+      "audio": "I'd like an iced Americano, please.",
+      "options": [
+        { "text": "点咖啡", "correct": true },
+        { "text": "问路", "correct": false },
+        { "text": "打招呼", "correct": false },
+        { "text": "投诉", "correct": false }
+      ]
+    },
+    {
+      "type": "intention",
+      "instruction": "听这段音频，选择正确的意图",
+      "audio": "Could I get a latte to go?",
+      "options": [
+        { "text": "告别", "correct": false },
+        { "text": "外带咖啡", "correct": true },
+        { "text": "预订座位", "correct": false },
+        { "text": "结账", "correct": false }
+      ]
+    },
+    {
+      "type": "intention",
+      "instruction": "听这段音频，选择正确的意图",
+      "audio": "Is there oat milk available?",
+      "options": [
+        { "text": "问价格", "correct": false },
+        { "text": "问配料", "correct": true },
+        { "text": "问位置", "correct": false },
+        { "text": "问时间", "correct": false }
+      ]
+    },
+    {
+      "type": "assembly",
+      "instruction": "将碎片拼成完整的句子",
+      "fragments": ["I'd", "like", "an iced", "Americano", "please"],
+      "answer": ["I'd", "like", "an iced", "Americano", "please"],
+      "distractors": ["want", "a hot"]
+    },
+    {
+      "type": "assembly",
+      "instruction": "将碎片拼成完整的句子",
+      "fragments": ["Could I", "get a", "latte", "to go"],
+      "answer": ["Could I", "get a", "latte", "to go"],
+      "distractors": ["have", "for here"]
+    }
+  ],
+  "mapNodes": [
+    { "id": 1, "icon": "coffee", "label": "点咖啡", "concept": "ordering_coffee" },
+    { "id": 2, "icon": "coffee", "label": "奶制品选择", "concept": "milk_options" },
+    { "id": 3, "icon": "coffee", "label": "冰饮 vs 热饮", "concept": "hot_or_iced" },
+    { "id": 4, "icon": "food", "label": "搭配点心", "concept": "pastry_order" },
+    { "id": 5, "icon": "business", "label": "结账付款", "concept": "payment" },
+    { "id": 6, "icon": "profile", "label": "寒暄告别", "concept": "greetings" },
+    { "id": 7, "icon": "globe", "label": "问路指路", "concept": "directions" },
+    { "id": 8, "icon": "discover", "label": "时间表达", "concept": "time_expressions" }
+  ],
+  "sampleLesson": {
+    "lessonId": "coffee-basics-001",
+    "exercises": [
+      {
+        "type": "listen_and_tap",
+        "instruction": "听音频，拼出正确的句子",
+        "prompt": "I'd like an iced Americano, please.",
+        "l1": "我想要一杯冰美式，谢谢。",
+        "targetChunk": "iced_americano_order",
+        "answer": ["I'd", "like", "an iced", "Americano", "please"],
+        "interferenceOptions": ["want", "a hot", "could I"]
+      },
+      {
+        "type": "translate",
+        "instruction": "将中文翻译成英文",
+        "prompt": "我能外带一杯拿铁吗？",
+        "l1": "我能外带一杯拿铁吗？",
+        "targetChunk": "latte_to_go",
+        "answer": ["Could I", "get a", "latte", "to go"],
+        "interferenceOptions": ["have", "for here", "want"]
+      },
+      {
+        "type": "listen_and_tap",
+        "instruction": "听音频，拼出正确的句子",
+        "prompt": "Is there oat milk available?",
+        "l1": "有燕麦奶吗？",
+        "targetChunk": "oat_milk_available",
+        "answer": ["Is there", "oat milk", "available"],
+        "interferenceOptions": ["any", "soy milk", "here"]
+      },
+      {
+        "type": "translate",
+        "instruction": "将中文翻译成英文",
+        "prompt": "我要一杯热可可。",
+        "l1": "我要一杯热可可。",
+        "targetChunk": "hot_cocoa_order",
+        "answer": ["I'll", "have a", "hot cocoa"],
+        "interferenceOptions": ["want", "iced cocoa", "get"]
+      }
+    ]
+  }
+}

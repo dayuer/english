@@ -1,0 +1,176 @@
+[
+  {
+    "id": "raz-AA",
+    "level": "AA",
+    "wordCount": 422,
+    "file": "raz-AA.json"
+  },
+  {
+    "id": "raz-A",
+    "level": "A",
+    "wordCount": 487,
+    "file": "raz-A.json"
+  },
+  {
+    "id": "raz-B",
+    "level": "B",
+    "wordCount": 465,
+    "file": "raz-B.json"
+  },
+  {
+    "id": "raz-C",
+    "level": "C",
+    "wordCount": 480,
+    "file": "raz-C.json"
+  },
+  {
+    "id": "raz-D",
+    "level": "D",
+    "wordCount": 436,
+    "file": "raz-D.json"
+  },
+  {
+    "id": "raz-E",
+    "level": "E",
+    "wordCount": 427,
+    "file": "raz-E.json"
+  },
+  {
+    "id": "raz-F",
+    "level": "F",
+    "wordCount": 437,
+    "file": "raz-F.json"
+  },
+  {
+    "id": "raz-G",
+    "level": "G",
+    "wordCount": 435,
+    "file": "raz-G.json"
+  },
+  {
+    "id": "raz-H",
+    "level": "H",
+    "wordCount": 385,
+    "file": "raz-H.json"
+  },
+  {
+    "id": "raz-I",
+    "level": "I",
+    "wordCount": 408,
+    "file": "raz-I.json"
+  },
+  {
+    "id": "raz-J",
+    "level": "J",
+    "wordCount": 434,
+    "file": "raz-J.json"
+  },
+  {
+    "id": "raz-K",
+    "level": "K",
+    "wordCount": 397,
+    "file": "raz-K.json"
+  },
+  {
+    "id": "raz-L",
+    "level": "L",
+    "wordCount": 402,
+    "file": "raz-L.json"
+  },
+  {
+    "id": "raz-M",
+    "level": "M",
+    "wordCount": 403,
+    "file": "raz-M.json"
+  },
+  {
+    "id": "raz-N",
+    "level": "N",
+    "wordCount": 376,
+    "file": "raz-N.json"
+  },
+  {
+    "id": "raz-O",
+    "level": "O",
+    "wordCount": 429,
+    "file": "raz-O.json"
+  },
+  {
+    "id": "raz-P",
+    "level": "P",
+    "wordCount": 379,
+    "file": "raz-P.json"
+  },
+  {
+    "id": "raz-Q",
+    "level": "Q",
+    "wordCount": 442,
+    "file": "raz-Q.json"
+  },
+  {
+    "id": "raz-R",
+    "level": "R",
+    "wordCount": 422,
+    "file": "raz-R.json"
+  },
+  {
+    "id": "raz-S",
+    "level": "S",
+    "wordCount": 434,
+    "file": "raz-S.json"
+  },
+  {
+    "id": "raz-T",
+    "level": "T",
+    "wordCount": 427,
+    "file": "raz-T.json"
+  },
+  {
+    "id": "raz-U",
+    "level": "U",
+    "wordCount": 418,
+    "file": "raz-U.json"
+  },
+  {
+    "id": "raz-V",
+    "level": "V",
+    "wordCount": 409,
+    "file": "raz-V.json"
+  },
+  {
+    "id": "raz-W",
+    "level": "W",
+    "wordCount": 392,
+    "file": "raz-W.json"
+  },
+  {
+    "id": "raz-X",
+    "level": "X",
+    "wordCount": 546,
+    "file": "raz-X.json"
+  },
+  {
+    "id": "raz-Y",
+    "level": "Y",
+    "wordCount": 461,
+    "file": "raz-Y.json"
+  },
+  {
+    "id": "raz-Z",
+    "level": "Z",
+    "wordCount": 414,
+    "file": "raz-Z.json"
+  },
+  {
+    "id": "raz-Z1",
+    "level": "Z1",
+    "wordCount": 467,
+    "file": "raz-Z1.json"
+  },
+  {
+    "id": "raz-Z2",
+    "level": "Z2",
+    "wordCount": 492,
+    "file": "raz-Z2.json"
+  }
+]
