@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: typography.sizes['2xl'],
-    fontWeight: '800',
+    fontWeight: typography.weights.extrabold,
     color: colors.textPrimary,
   },
   badge: {
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     fontSize: typography.sizes.sm,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.accentBlue,
   },
   scrollContent: {
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   },
   cardLabel: {
     fontSize: typography.sizes.base,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     color: colors.textPrimary,
     marginBottom: spacing.md,
   },
@@ -156,12 +156,12 @@ const styles = StyleSheet.create({
   },
   statValue: {
     fontSize: typography.sizes.lg,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.primary,
   },
   statLabel: {
     fontSize: typography.sizes.xs,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     color: colors.textMuted,
     textTransform: 'uppercase',
     letterSpacing: 1,
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   iconCircle: {
     width: 48,
     height: 48,
-    borderRadius: 24,
+    borderRadius: radii['2xl'],
     backgroundColor: colors.primaryContainer,
     justifyContent: 'center',
     alignItems: 'center',
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   },
   lessonTitle: {
     fontSize: typography.sizes.base,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
   },
   lessonSub: {
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   reinforceIconCircle: {
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: radii.xl,
     backgroundColor: colors.primaryContainer,
     justifyContent: 'center',
     alignItems: 'center',
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   },
   reinforceText: {
     fontSize: typography.sizes.sm,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
     color: colors.textPrimary,
   },
 });

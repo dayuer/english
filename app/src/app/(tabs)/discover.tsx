@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: typography.sizes.xl,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
     marginTop: spacing['3xl'],
     marginBottom: spacing.xs,

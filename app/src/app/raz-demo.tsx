@@ -137,9 +137,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.xl, paddingVertical: spacing.lg,
   },
   backBtn: { padding: spacing.xs },
-  title: { fontSize: typography.sizes.lg, fontWeight: '700', color: colors.textPrimary },
+  title: { fontSize: typography.sizes.lg, fontWeight: typography.weights.bold, color: colors.textPrimary },
   scrollContent: { paddingHorizontal: spacing.xl, paddingBottom: spacing['4xl'] },
-  desc: { fontSize: typography.sizes.sm, color: colors.textSecondary, marginBottom: spacing.lg, lineHeight: 20 },
+  desc: { fontSize: typography.sizes.sm, color: colors.textSecondary, marginBottom: spacing.lg, lineHeight: typography.lineHeights.tight },
 
   // 级别选择器
   levelSelector: { paddingBottom: spacing.md, gap: spacing.sm },
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     borderRadius: radii.full, backgroundColor: colors.surfaceContainer,
   },
   levelBtnActive: { backgroundColor: colors.primaryContainer },
-  levelText: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.textSecondary },
+  levelText: { fontSize: typography.sizes.sm, fontWeight: typography.weights.semibold, color: colors.textSecondary },
   levelTextActive: { color: colors.primary },
 
   // 章节选择器
@@ -159,16 +159,16 @@ const styles = StyleSheet.create({
     alignItems: 'center', justifyContent: 'center',
   },
   chapterBtnActive: { backgroundColor: colors.primary },
-  chapterText: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.textSecondary },
-  chapterTextActive: { color: '#fff' },
+  chapterText: { fontSize: typography.sizes.sm, fontWeight: typography.weights.semibold, color: colors.textSecondary },
+  chapterTextActive: { color: colors.onPrimary },
 
   // 词汇网格
   wordGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md, justifyContent: 'space-between' },
   wordCard: { padding: spacing.lg },
   wordHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.xs },
-  wordTitle: { fontSize: typography.sizes.lg, fontWeight: '700', color: colors.textPrimary, flex: 1, marginRight: spacing.xs },
+  wordTitle: { fontSize: typography.sizes.lg, fontWeight: typography.weights.bold, color: colors.textPrimary, flex: 1, marginRight: spacing.xs },
   wordTranslation: { fontSize: typography.sizes.xs, color: colors.textSecondary, marginBottom: 4 },
-  wordDifficulty: { fontSize: typography.sizes.xs, fontWeight: '600', color: colors.textMuted, textTransform: 'uppercase' },
+  wordDifficulty: { fontSize: typography.sizes.xs, fontWeight: typography.weights.semibold, color: colors.textMuted, textTransform: 'uppercase' },
 
   // 翻页
   pagination: {
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     borderRadius: radii.lg, backgroundColor: colors.surfaceContainer,
   },
   pageBtnDisabled: { opacity: 0.3 },
-  pageBtnText: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.primary },
+  pageBtnText: { fontSize: typography.sizes.sm, fontWeight: typography.weights.semibold, color: colors.primary },
   pageBtnTextDisabled: { color: colors.textMuted },
-  pageInfo: { fontSize: typography.sizes.sm, fontWeight: '600', color: colors.textSecondary },
+  pageInfo: { fontSize: typography.sizes.sm, fontWeight: typography.weights.semibold, color: colors.textSecondary },
 });

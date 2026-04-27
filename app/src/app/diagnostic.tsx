@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 14,
+    gap: spacing.lg,
     paddingTop: spacing.lg,
     marginBottom: spacing['4xl'],
   },
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   timerValue: {
     fontSize: typography.sizes.lg,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     fontVariant: ['tabular-nums'] as any,
   },
   timerUnit: {
@@ -183,20 +183,20 @@ const styles = StyleSheet.create({
   audioRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: spacing.md,
     justifyContent: 'center',
   },
   audioText: {
     fontSize: typography.sizes.lg,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     color: colors.textPrimary,
     textAlign: 'center',
-    lineHeight: 30,
+    lineHeight: typography.lineHeights.loose,
   },
   optionsContainer: {
     width: '100%',
     maxWidth: 340,
-    gap: 10,
+    gap: spacing.md,
   },
   optionButton: {
     backgroundColor: colors.surfaceContainerLowest,

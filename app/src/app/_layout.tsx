@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { colors, typography, spacing } from '../theme';
+import { colors, typography, spacing, radii } from '../theme';
 import { initDatabase } from '../db/client';
 
 export default function RootLayout() {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   loadingText: {
     color: colors.primary,
     fontSize: typography.sizes.xl,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
   },
   errorContainer: {
     flex: 1,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   errorTitle: {
     fontSize: typography.sizes.xl,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
     marginBottom: spacing.sm,
   },
@@ -96,18 +96,18 @@ const styles = StyleSheet.create({
     fontSize: typography.sizes.base,
     color: colors.textSecondary,
     textAlign: 'center',
-    lineHeight: 22,
+    lineHeight: typography.lineHeights.normal,
     marginBottom: spacing.xl,
   },
   retryButton: {
     backgroundColor: colors.primary,
-    paddingVertical: spacing.md,
+    paddingVertical: spacing.lg,
     paddingHorizontal: spacing['3xl'],
-    borderRadius: 12,
+    borderRadius: radii.lg,
   },
   retryText: {
     color: colors.onPrimary,
     fontSize: typography.sizes.md,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
   },
 });

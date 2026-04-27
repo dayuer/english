@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { Icon } from '../../components/ui/Icon';
-import { colors, shadows, typography } from '../../theme';
+import { colors, shadows, spacing, typography } from '../../theme';
 
 export default function TabLayout() {
   return (
@@ -20,11 +20,11 @@ export default function TabLayout() {
           shadowRadius: 8,
           height: 84, // Account for safe area roughly (can also be handled by hook, 84 is a safe iOS default)
           paddingBottom: 28,
-          paddingTop: 8,
+          paddingTop: spacing.sm,
         },
         tabBarLabelStyle: {
           fontSize: typography.sizes.xs,
-          marginTop: 4,
+          marginTop: spacing.xs,
         },
       }}
     >

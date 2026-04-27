@@ -31,12 +31,15 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   value: {
-    fontSize: typography.sizes.xl,
-    fontWeight: '700',
+    fontSize: typography.sizes.lg,
+    fontWeight: typography.weights.bold,
     color: colors.primary,
   },
   label: {
     fontSize: typography.sizes.xs,
+    fontWeight: typography.weights.semibold,
     color: colors.textMuted,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
 });

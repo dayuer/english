@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontSize: typography.sizes.base,
-    fontWeight: '500',
+    fontSize: typography.sizes.sm,
+    fontWeight: typography.weights.semibold,
   },
   // Interest Variants
   interest: {

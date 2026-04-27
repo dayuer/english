@@ -109,6 +109,23 @@ export interface ArticleGenerationResult {
   outOfVocabularyWords: string[];
 }
 
+// ─── 风格分界（设计文档 §2.2 生成策略） ────────────────
+
+export type ArticleStyle = 'narrative' | 'news' | 'opinion' | 'academic';
+
+export const RAZ_STYLE_TIERS: { levels: ReadingLevel[]; style: ArticleStyle; description: string }[] = [
+  { levels: ['AA','A','B','C','D','E'], style: 'narrative', description: '简单叙事短文（30-60词），主语+动词+宾语基本句型' },
+  { levels: ['F','G','H','I','J','K','L'], style: 'news', description: '新闻播报风格（60-120词），引入时间状语和因果关系' },
+  { levels: ['M','N','O','P','Q','R'], style: 'opinion', description: '议论短文（100-200词），出现观点对比和复合句' },
+  { levels: ['S','T','U','V','W','X','Y','Z','Z1','Z2'], style: 'academic', description: '仿真学术摘要（150-300词），允许被动语态和从句嵌套' },
+];
+
+/** 根据级别获取对应的生成风格 */
+export function getArticleStyle(level: ReadingLevel): { style: ArticleStyle; description: string } {
+  const tier = RAZ_STYLE_TIERS.find((t) => t.levels.includes(level));
+  return tier ? { style: tier.style, description: tier.description } : { style: 'narrative', description: '' };
+}
+
 // ─── 词数规范（RAZ 官方参考） ──────────────────────────
 
 /** RAZ 级别对应的建议词数范围 */

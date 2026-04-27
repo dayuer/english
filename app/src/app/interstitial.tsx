@@ -114,14 +114,14 @@ const styles = StyleSheet.create({
   chunkLabel: {
     fontSize: typography.sizes.sm,
     color: colors.accentEmerald,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     letterSpacing: 1,
     textTransform: 'uppercase',
     marginBottom: spacing.sm,
   },
   chunkText: {
-    fontSize: 28,
-    fontWeight: '700',
+    fontSize: typography.sizes['2xl'],
+    fontWeight: typography.weights.bold,
     color: colors.primary,
   },
   breathContainer: {
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   breathText: {
     fontSize: typography.sizes.lg,
     color: colors.textSecondary,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
   },
   buttonContainer: {
     position: 'absolute',

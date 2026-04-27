@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: typography.sizes['2xl'],
-    fontWeight: '800',
+    fontWeight: typography.weights.extrabold,
     color: colors.textPrimary,
     marginBottom: spacing.md,
   },
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: typography.sizes.base,
     color: colors.textSecondary,
     textAlign: 'center',
-    lineHeight: 24,
+    lineHeight: typography.lineHeights.relaxed,
   },
   footer: {
     padding: spacing.xl,

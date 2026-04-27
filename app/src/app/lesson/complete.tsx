@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: typography.sizes['2xl'],
-    fontWeight: '800',
+    fontWeight: typography.weights.extrabold,
     color: colors.textPrimary,
     marginBottom: spacing.xl,
   },

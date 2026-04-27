@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: typography.sizes['2xl'],
-    fontWeight: '800',
+    fontWeight: typography.weights.extrabold,
     color: colors.textPrimary,
     marginBottom: spacing.md,
   },
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   statText: {
     fontSize: typography.sizes.sm,
     color: colors.textSecondary,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
   },
   scrollContent: {
     alignItems: 'center',
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   },
   nodeTitle: {
     fontSize: typography.sizes.sm,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
   },
   nodeTitleLocked: {

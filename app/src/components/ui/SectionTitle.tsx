@@ -15,7 +15,7 @@ export function SectionTitle({ title, style }: SectionTitleProps) {
 const styles = StyleSheet.create({
   title: {
     fontSize: typography.sizes.lg,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textSecondary,
     marginBottom: spacing.md,
   },

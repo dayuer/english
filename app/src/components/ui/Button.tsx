@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: typography.sizes.md,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
   },
   textPrimary: {
     color: colors.onPrimary,

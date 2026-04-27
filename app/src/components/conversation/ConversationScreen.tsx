@@ -20,6 +20,7 @@ import {
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { typography } from '../../theme';
 
 import { ConversationFSM } from '../../services/conversation-fsm';
 import { GLMVoiceClient } from '../../services/glm-voice';
@@ -455,13 +456,13 @@ const styles = StyleSheet.create({
   briefingTitle: {
     color: '#f1f5f9',
     fontSize: 28,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     marginBottom: 12,
   },
   briefingDesc: {
     color: '#94a3b8',
     fontSize: 15,
-    lineHeight: 22,
+    lineHeight: typography.lineHeights.normal,
     marginBottom: 28,
   },
   personaBox: {
@@ -473,7 +474,7 @@ const styles = StyleSheet.create({
   personaLabel: {
     color: '#64748b',
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     textTransform: 'uppercase',
     letterSpacing: 1,
     marginBottom: 6,
@@ -481,7 +482,7 @@ const styles = StyleSheet.create({
   personaText: {
     color: '#cbd5e1',
     fontSize: 14,
-    lineHeight: 20,
+    lineHeight: typography.lineHeights.tight,
   },
   briefingHint: {
     color: '#475569',
@@ -499,7 +500,7 @@ const styles = StyleSheet.create({
   startBtnText: {
     color: '#ffffff',
     fontSize: 17,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
   },
 
   // ─── Top Bar ──────────────────────────────
@@ -520,7 +521,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: '#e2e8f0',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     marginLeft: 12,
   },
   emotionBadge: {
@@ -532,7 +533,7 @@ const styles = StyleSheet.create({
   emotionText: {
     color: '#f59e0b',
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     letterSpacing: 0.5,
   },
 
@@ -568,13 +569,13 @@ const styles = StyleSheet.create({
   speakerLabel: {
     color: '#64748b',
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     marginBottom: 4,
   },
   dialogText: {
     color: '#e2e8f0',
     fontSize: 15,
-    lineHeight: 22,
+    lineHeight: typography.lineHeights.normal,
   },
   systemText: {
     color: '#64748b',
@@ -587,7 +588,7 @@ const styles = StyleSheet.create({
   reactionBadge: {
     marginTop: 6,
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
   },
   reflexBadge: {
     color: '#22c55e', // ≤400ms 条件反射
@@ -650,7 +651,7 @@ const styles = StyleSheet.create({
   },
   resultTitle: {
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     marginBottom: 16,
   },
   successText: {
@@ -662,7 +663,7 @@ const styles = StyleSheet.create({
   resultDetail: {
     color: '#94a3b8',
     fontSize: 15,
-    lineHeight: 24,
+    lineHeight: typography.lineHeights.relaxed,
     textAlign: 'center',
   },
 });

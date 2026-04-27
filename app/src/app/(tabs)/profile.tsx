@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     fontSize: typography.sizes['2xl'],
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
   },
   userCard: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   avatarText: {
     fontSize: typography.sizes['2xl'],
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.accentBlue,
   },
   userInfo: {
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: typography.sizes.lg,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
   },
   userRole: {
@@ -137,12 +137,12 @@ const styles = StyleSheet.create({
   },
   statValue: {
     fontSize: typography.sizes.lg,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.primary,
   },
   statLabel: {
     fontSize: typography.sizes.xs,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     color: colors.textMuted,
     textTransform: 'uppercase',
     letterSpacing: 1,
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: spacing.lg,
     fontSize: typography.sizes.base,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
     color: colors.textPrimary,
   },
 });

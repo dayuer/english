@@ -82,13 +82,13 @@ const styles = StyleSheet.create({
   },
   levelText: {
     position: 'absolute',
-    fontSize: 32,
-    fontWeight: '800',
+    fontSize: typography.sizes['3xl'],
+    fontWeight: typography.weights.extrabold,
     color: colors.primary,
   },
   title: {
     fontSize: typography.sizes.xl,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
     marginBottom: spacing.sm,
   },
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     fontSize: typography.sizes.sm,
     color: colors.textSecondary,
     textAlign: 'center',
-    lineHeight: 22,
+    lineHeight: typography.lineHeights.normal,
     marginBottom: spacing['2xl'],
   },
   statsRow: {

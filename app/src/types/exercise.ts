@@ -20,6 +20,8 @@ export interface Exercise {
   prompt?: string;
   /** shadowing_speak 专用：期望识别的文本（用于和 ASR 结果正交对比归一化文本） */
   expectedText?: string;
+  /** 分级阅读短文（设计文档 §2.2 reading 字段） */
+  reading?: ExerciseReading;
 }
 
 export type ExerciseType = 'listen_and_tap' | 'translate_l1_to_l2' | 'intention' | 'assembly' | 'shadowing_speak';
@@ -27,4 +29,18 @@ export type ExerciseType = 'listen_and_tap' | 'translate_l1_to_l2' | 'intention'
 export interface ExerciseOption {
   text: string;
   correct: boolean;
+}
+
+/** 课程内嵌的分级阅读短文（设计文档 §2.2 Lesson JSON Schema reading 字段） */
+export interface ExerciseReading {
+  title: string;
+  body: string;
+  audioFile?: string | null;
+  comprehensionQuestions: ExerciseReadingQuestion[];
+}
+
+export interface ExerciseReadingQuestion {
+  question: string;
+  options: string[];
+  correct: number;
 }

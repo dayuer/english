@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   rowValue: {
     fontSize: typography.sizes.base,
     color: colors.textPrimary,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
   },
   packRow: {
     paddingVertical: spacing.md,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   packTitle: {
     fontSize: typography.sizes.base,
     color: colors.textPrimary,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     marginBottom: 2,
   },
   packMeta: {
@@ -151,7 +151,7 @@ const sectionStyles = StyleSheet.create({
   title: {
     fontSize: typography.sizes.xs,
     color: colors.textMuted,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     textTransform: 'uppercase',
     letterSpacing: 1,
     marginBottom: spacing.sm,

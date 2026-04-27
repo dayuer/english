@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     fontSize: typography.sizes.xl,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
     alignSelf: 'flex-start',
     marginBottom: spacing['2xl'],
@@ -128,18 +128,18 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
   },
   scoreNumber: {
-    fontSize: 48,
-    fontWeight: '700',
+    fontSize: typography.sizes.display,
+    fontWeight: typography.weights.bold,
     color: colors.primary,
   },
   scoreSuffix: {
-    fontSize: 24,
-    fontWeight: '500',
+    fontSize: typography.sizes['3xl'],
+    fontWeight: typography.weights.medium,
     color: colors.primary,
   },
   scoreLabel: {
     fontSize: typography.sizes.xs,
-    fontWeight: '600',
+    fontWeight: typography.weights.semibold,
     color: colors.textMuted,
     textTransform: 'uppercase',
     letterSpacing: 2,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
   resultTitle: {
     fontSize: typography.sizes['2xl'],
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
     marginBottom: spacing.sm,
   },
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     fontSize: typography.sizes.base,
     color: colors.textSecondary,
     textAlign: 'center',
-    lineHeight: 24,
+    lineHeight: typography.lineHeights.relaxed,
     marginBottom: spacing['2xl'],
   },
   analysisCard: {
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   analysisTitle: {
     fontSize: typography.sizes.xs,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textMuted,
     textTransform: 'uppercase',
     letterSpacing: 2,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   wordName: {
     fontSize: typography.sizes.lg,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
     color: colors.textPrimary,
   },
   phonetic: {
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   },
   wordNote: {
     fontSize: typography.sizes.xs,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
     marginTop: 2,
   },
   statusBadge: {
@@ -216,6 +216,6 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontSize: typography.sizes.xs,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
   },
 });

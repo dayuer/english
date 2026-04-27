@@ -178,3 +178,53 @@ export async function lookupWord(word: string): Promise<VocabularyEntry | null> 
 
   return null;
 }
+
+/**
+ * 词汇墙后置校验 — 检查文本中是否有超纲词
+ *
+ * 设计文档 §2.1 规则：
+ * - 逐词检查是否在词汇墙内
+ * - 超纲 >5% → clean=false（建议拒绝重试）
+ * - 超纲 ≤5% → clean=true（超纲词用 [*] 标注为"新词预览"）
+ */
+export function validateAgainstWall(
+  text: string,
+  wall: Set<string>,
+): { clean: boolean; outOfVocabulary: string[]; ratio: number } {
+  // 基础功能词白名单（设计文档 §2.1 允许）
+  const ALLOWED_FUNCTION_WORDS = new Set([
+    'a', 'an', 'the', 'is', 'are', 'was', 'were', 'am', 'be', 'been', 'being',
+    'i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them',
+    'my', 'your', 'his', 'its', 'our', 'their', 'mine', 'yours', 'hers', 'ours',
+    'this', 'that', 'these', 'those', 'what', 'which', 'who', 'whom', 'whose',
+    'do', 'does', 'did', 'have', 'has', 'had', 'will', 'would', 'can', 'could',
+    'shall', 'should', 'may', 'might', 'must', 'need', 'ought', 'dare',
+    'and', 'but', 'or', 'nor', 'for', 'yet', 'so', 'if', 'then', 'than',
+    'in', 'on', 'at', 'to', 'of', 'by', 'with', 'from', 'up', 'down', 'out',
+    'off', 'over', 'under', 'about', 'into', 'through', 'after', 'before',
+    'between', 'among', 'above', 'below', 'around', 'against', 'during',
+    'not', 'no', 'yes', 'all', 'each', 'every', 'both', 'few', 'more', 'most',
+    'some', 'any', 'many', 'much', 'other', 'another', 'such', 'only',
+    'very', 'just', 'also', 'too', 'here', 'there', 'now', 'how', 'when',
+    'where', 'why', 'again', 'still', 'even', 'back', 'because', 'as',
+    'until', 'while', 'since', 'though', 'although',
+  ]);
+
+  const words = text.toLowerCase().match(/[a-z']+/g) || [];
+  const outOfVocabulary: string[] = [];
+
+  for (const w of words) {
+    const clean = w.replace(/^'+|'+$/g, '');
+    if (!clean) continue;
+    if (wall.has(clean) || ALLOWED_FUNCTION_WORDS.has(clean)) continue;
+    outOfVocabulary.push(clean);
+  }
+
+  const ratio = words.length > 0 ? outOfVocabulary.length / words.length : 0;
+
+  return {
+    clean: ratio <= 0.05,
+    outOfVocabulary: [...new Set(outOfVocabulary)],
+    ratio,
+  };
+}

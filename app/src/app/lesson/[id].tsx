@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     fontSize: typography.sizes.sm,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
     color: colors.textSecondary,
   },
   thinProgress: {
@@ -193,25 +193,22 @@ const styles = StyleSheet.create({
   },
   instruction: {
     fontSize: typography.sizes.sm,
-    fontWeight: '500',
+    fontWeight: typography.weights.medium,
     color: colors.textMuted,
     marginBottom: spacing.lg,
   },
   promptText: {
     fontSize: typography.sizes.lg,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
     color: colors.textPrimary,
     textAlign: 'center',
     marginBottom: spacing['3xl'],
-    lineHeight: 28,
+    lineHeight: typography.lineHeights.spacious,
   },
   dropZone: {
     minHeight: 160,
     width: '100%',
-    backgroundColor: colors.bgCard,
-    borderWidth: 2,
-    borderColor: colors.outlineVariant,
-    borderStyle: 'dashed',
+    backgroundColor: colors.surfaceContainer,
     borderRadius: radii.xl,
     padding: spacing.xl,
     marginBottom: spacing['3xl'],
@@ -266,7 +263,7 @@ const styles = StyleSheet.create({
   },
   feedbackText: {
     fontSize: typography.sizes.lg,
-    fontWeight: '700',
+    fontWeight: typography.weights.bold,
   },
   feedbackTextCorrect: {
     color: colors.accentEmerald,
